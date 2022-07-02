@@ -86,7 +86,6 @@ export default {
 </script>
 <style scoped>
   #randomBtn{
-    right: 1rem;
-    position: fixed;
+    margin-left: auto;
   }
 </style>

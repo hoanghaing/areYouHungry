@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex mt-2 ml-2">
-    <span class="mt-1">Explore By:</span>
     <select
       class="custom-select ml-2 mr-2"
       style="width: 8rem"
@@ -20,10 +19,8 @@
       </option>
     </select>
     <filter-list :lists="filterLists" />
-    <span class="mt-1 ml-auto">Or, find meal by first letter:
-    </span>
     <ul
-      class="pagination ml-2 mr-4"
+      class="pagination ml-auto mr-4"
     >
       <li
         v-for="letter in letters"
