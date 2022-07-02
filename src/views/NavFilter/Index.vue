@@ -20,8 +20,11 @@
       </option>
     </select>
     <filter-list :lists="filterLists" />
-    <span class="mt-1">Or, find meal by first letter: </span>
-    <ul class="pagination ml-2">
+    <span class="mt-1 ml-auto">Or, find meal by first letter:
+    </span>
+    <ul
+      class="pagination ml-2 mr-4"
+    >
       <li
         v-for="letter in letters"
         :key="letter"
