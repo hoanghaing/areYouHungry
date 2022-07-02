@@ -8,8 +8,9 @@
       <div
         v-for="item in lists"
         :key="`meal-${item.idMeal}`"
-        class="card"
+        class="card list-item"
         style="width: 16rem; display: block; margin: 0.5rem 0.5rem;"
+        @click="clickMeal(item.idMeal)"
       >
         <img
           class="card-img-top"
@@ -98,17 +99,29 @@ export default {
           });
       }
     },
+    clickMeal(id) {
+      this.$router.push({ name: 'meal.index', query: { id } });
+    },
   },
 };
 </script>
 
 <style scoped>
-.loader{
+.loader {
   width: 100%;
   height: 100%;
   z-index: 10;
   background:
   url('//upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Phi_fenomeni.gif/50px-Phi_fenomeni.gif')
     50% 50% no-repeat rgb(249,249,249);
+}
+
+.list-item {
+  border: solid 1px #0050e6;
+  transition: border-width 0.2s linear;
+}
+
+.list-item:hover {
+  border-width: 5px;
 }
 </style>

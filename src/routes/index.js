@@ -6,7 +6,11 @@
  */
 
 export default [
-  // Home
+  {
+    path: '/meal',
+    name: 'meal.index',
+    component: () => import('@/views/Meal/Index.vue'),
+  },
   {
     path: '/home',
     name: 'home.index',
@@ -14,11 +18,6 @@ export default [
   },
   {
     path: '/',
-    redirect: '/home',
-  },
-
-  {
-    path: '/*',
     redirect: '/home',
   },
 ];
