@@ -47,7 +47,6 @@ export default {
     $route: 'fetchData',
   },
   mounted() {
-    // console.log(this.$store.state.meals);
   },
   methods: {
     ...mapGetters([
@@ -61,7 +60,6 @@ export default {
           .then((response) => response.json())
           .then((data) => {
             const { meals } = data;
-            this.setMealsAction(meals);
             this.lists = meals;
           });
       } else if (this.$route.query.name && this.$route.query.name.length > 0) {
@@ -70,7 +68,6 @@ export default {
           .then((response) => response.json())
           .then((data) => {
             const { meals } = data;
-            this.setMealsAction(meals);
             this.lists = meals;
           });
       } else if (this.$route.query.filter && this.$route.query.filter.length > 0) {
@@ -93,8 +90,6 @@ export default {
           .then((response) => response.json())
           .then((data) => {
             const { meals } = data;
-            console.log(meals);
-            this.setMealsAction(meals);
             this.lists = meals;
           });
       }

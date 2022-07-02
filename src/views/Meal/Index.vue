@@ -38,7 +38,6 @@ export default {
           const { meals } = data;
           const [meal] = meals;
           this.detail = meal;
-          console.log(this.detail);
         });
     }
   },
@@ -51,7 +50,6 @@ export default {
             const { meals } = data;
             const [meal] = meals;
             this.detail = meal;
-            console.log(this.detail);
           });
       }
     },
