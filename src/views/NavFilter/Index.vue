@@ -29,7 +29,6 @@ export default {
   methods: {
     ...mapActions(['setMealsAction']),
     async getMealByFirstLetter(letter) {
-      this.setMealsAction([]);
       this.$router.push({ path: '/home', query: { firstletter: letter } });
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%; height:100%">
     <div
-      v-if="lists"
+      v-if="lists.length > 0"
       class="ml-2 d-flex"
       style="flex-flow: row wrap"
     >
@@ -31,45 +31,40 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Meals',
   data() {
     return {
+      lists: this.$store.state.meals,
     };
   },
   computed: {
-    ...mapState({
-      lists: (state) => state.meals,
-    }),
   },
   watch: {
-    $route(to) {
-      if (to.name === 'home.index') {
-        if (this.$route.query.firstletter && this.$route.query.firstletter.length > 1) {
-          const { firstletter } = this.$route.query;
-          const url = `www.themealdb.com/api/json/v1/1/search.php?f=${firstletter}`;
-          fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-              const { meals } = data;
-              this.lists = meals;
-              // this.setMealsAction(meals);
-            });
-        }
-      }
-    },
-
+    $route: 'fetchName',
   },
   mounted() {
-    this.lists = this.getAllMeals();
-    console.log(this.lists);
+    console.log(this.$store.state.meals);
   },
   methods: {
     ...mapGetters([
       'getAllMeals',
     ]),
+    ...mapActions(['setMealsAction']),
+    fetchName() {
+      if (this.$route.query.firstletter && this.$route.query.firstletter.length > 0) {
+        const { firstletter } = this.$route.query;
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstletter}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const { meals } = data;
+            this.setMealsAction(meals);
+            this.lists = meals;
+          });
+      }
+    },
   },
 };
 </script>
