@@ -47,7 +47,7 @@ export default {
     $route: 'fetchData',
   },
   mounted() {
-    console.log(this.$store.state.meals);
+    // console.log(this.$store.state.meals);
   },
   methods: {
     ...mapGetters([
