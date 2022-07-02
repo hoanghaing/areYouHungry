@@ -22,10 +22,16 @@ export default {
       detail: {},
     };
   },
+  watch: {
+    $route: 'fetchData',
+  },
   mounted() {
     if (this.$route.query.id && this.$route.query.id.length > 1) {
       const { id } = this.$route.query;
-      const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      let url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      if (id === 'random') {
+        url = 'https://www.themealdb.com/api/json/v1/1/random.php';
+      }
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -35,6 +41,20 @@ export default {
           console.log(this.detail);
         });
     }
+  },
+  methods: {
+    fetchData() {
+      if (this.$route.query.id && this.$route.query.id === 'random') {
+        fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+          .then((response) => response.json())
+          .then((data) => {
+            const { meals } = data;
+            const [meal] = meals;
+            this.detail = meal;
+            console.log(this.detail);
+          });
+      }
+    },
   },
 };
 </script>

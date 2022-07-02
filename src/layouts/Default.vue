@@ -12,6 +12,7 @@
         id="randomBtn"
         type="button"
         class="btn btn-secondary btn-sm"
+        @click="randomMeal"
       >
         Random
       </button>
@@ -80,6 +81,9 @@ export default {
           const { meals } = data;
           this.setMealsAction(meals);
         });
+    },
+    randomMeal() {
+      this.$router.push({ name: 'meal.index', query: { id: 'random' } });
     },
   },
 };
