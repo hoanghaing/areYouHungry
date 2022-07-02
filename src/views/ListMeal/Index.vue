@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%; height:100%">
     <div
-      v-if="lists.length > 0"
+      v-if="lists && lists.length > 0"
       class="ml-2 d-flex"
       style="flex-flow: row wrap"
     >
@@ -43,7 +43,7 @@ export default {
   computed: {
   },
   watch: {
-    $route: 'fetchName',
+    $route: 'fetchData',
   },
   mounted() {
     console.log(this.$store.state.meals);
@@ -53,10 +53,19 @@ export default {
       'getAllMeals',
     ]),
     ...mapActions(['setMealsAction']),
-    fetchName() {
+    fetchData() {
       if (this.$route.query.firstletter && this.$route.query.firstletter.length > 0) {
         const { firstletter } = this.$route.query;
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstletter}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const { meals } = data;
+            this.setMealsAction(meals);
+            this.lists = meals;
+          });
+      } else if (this.$route.query.name && this.$route.query.name.length > 0) {
+        const { name } = this.$route.query;
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
           .then((response) => response.json())
           .then((data) => {
             const { meals } = data;

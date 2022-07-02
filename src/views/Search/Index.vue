@@ -27,8 +27,7 @@ export default {
       clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
         this.searchValue = event.target.value;
-        // console.log(this.searchValue);
-        console.log(this.getAllMeals());
+        this.$router.push({ path: '/home', query: { name: this.searchValue } });
       }, 600);
     },
   },
