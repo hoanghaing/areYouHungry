@@ -72,6 +72,30 @@ export default {
             this.setMealsAction(meals);
             this.lists = meals;
           });
+      } else if (this.$route.query.filter && this.$route.query.filter.length > 0) {
+        const { filter, val } = this.$route.query;
+        let url = '';
+        switch (filter) {
+          case 'area':
+            url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${val}`;
+            break;
+          case 'category':
+            url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${val}`;
+            break;
+          case 'ingredients':
+            url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${val}`;
+            break;
+          default:
+            break;
+        }
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const { meals } = data;
+            console.log(meals);
+            this.setMealsAction(meals);
+            this.lists = meals;
+          });
       }
     },
   },
